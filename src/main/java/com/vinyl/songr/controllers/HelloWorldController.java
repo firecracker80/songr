@@ -12,13 +12,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/hello")
 public class HelloWorldController {
     @GetMapping("/hello")
-    public String getHello(){
-        return "Hello World";
+    public String getHello(Model h){
+        h.addAttribute("cap", "hello");
+        return "hello";
     }
-    @GetMapping("/capitalize/{cap}")
-    public static String toUpperCase(@PathVariable String cap, Model c){
 
-        c.addAttribute("cap", cap);
-        return cap;
+    @GetMapping("/hello/{name}")
+    public String getHelloName(@PathVariable String name, Model h){
+        h.addAttribute("cap", "hello " + name);
+        return "hello";
+    }
+
+    @GetMapping("/capitalize/{cap}")
+    public String toUpperCase(@PathVariable String cap, Model c){
+
+        c.addAttribute("cap", cap.toUpperCase());
+        return "hello";
     }
 }
