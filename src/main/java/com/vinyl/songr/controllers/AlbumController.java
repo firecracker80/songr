@@ -1,28 +1,36 @@
 package com.vinyl.songr.controllers;
 
 
-import com.vinyl.songr.Albums;
+import com.vinyl.songr.models.Albums;
+import com.vinyl.songr.repo.AlbumsRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
-@RequestMapping("/album")
 public class AlbumController {
+
+    @Autowired
+    AlbumsRepo AlbumsRepo;
     @GetMapping("/albums")
-     public String getAlbum(String album, Model a) {
-        Albums MarcAnthony = new Albums("Marc Anthony","Marc Anthony", 10, 252, "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/3.0_%28Marc_Anthony_album_-_cover_art%29.jpg/220px-3.0_%28Marc_Anthony_album_-_cover_art%29.jpg" );
-        Albums MercyMe = new Albums("test", "test", 8, 100, "none" );
-        ArrayList<Albums> newAlbums = new ArrayList<>();
-        newAlbums.add(MarcAnthony);
-        newAlbums.add(MercyMe);
+     public String getAlbum(Model a) {
+        List<Albums> newAlbums = AlbumsRepo.findAll();
 
         a.addAttribute("albums", newAlbums);
-//        Albums LaurenDaigle = new Albums();
         return "songr";
+    }
+
+    @PostMapping("/albums")
+    public RedirectView createAlbums(String title, String artist, Integer songCount, Integer length, String imgUrl){
+        Albums newAlbum = new Albums(title, artist, songCount,length, imgUrl);
+        AlbumsRepo.save(newAlbum);
+        return new RedirectView("/albums");
     }
 }
