@@ -19,7 +19,6 @@ public class AlbumController {
     @GetMapping("/albums")
      public String getAlbum(Model a) {
         List<Albums> newAlbums = AlbumsRepo.findAll();
-
         a.addAttribute("albums", newAlbums);
         return "songr";
     }
@@ -27,6 +26,8 @@ public class AlbumController {
     @PostMapping("/albums")
     public RedirectView createAlbums(String title, String artist, Integer songCount, Integer length, String imgUrl){
         Albums newAlbum = new Albums(title, artist, songCount,length, imgUrl);
+//        SongController songs = new SongController();
+//        if()
         AlbumsRepo.save(newAlbum);
         return new RedirectView("/albums");
     }

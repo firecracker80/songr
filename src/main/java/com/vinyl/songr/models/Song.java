@@ -11,19 +11,26 @@ public class Song {
     public String title;
     public Integer length;
     public Integer trackNum;
-    public String album;
+    public Long albumId;
 
     @ManyToOne
     Albums albums;
     protected Song(){
     }
 
-    public Song(String title, Integer length, Integer trackNum, String album) {
+    public Song(String title, Integer length, Integer trackNum, Long albumId) {
         this.title = title;
         this.length = length;
         this.trackNum = trackNum;
-        this.album = album;
+        this.albumId = albumId;
     }
+
+//    public Song(Song aSong) {
+//        this.title = aSong.title;
+//        this.length = aSong.length;
+//        this.trackNum = aSong.trackNum;
+//        this.albumId = aSong.albumId;
+//    }
 
     public long getId() {
         return id;
@@ -57,12 +64,12 @@ public class Song {
         this.trackNum = trackNum;
     }
 
-    public String getAlbum() {
-        return album;
+    public Long getAlbum() {
+        return albumId;
     }
 
-    public void setAlbum(String album) {
-        this.album = album;
+    public void setAlbum(Albums album) {
+        this.albums = album;
     }
 }
 
