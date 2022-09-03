@@ -20,7 +20,7 @@
       </section>
     </article>
     <br/><br/><br/>
-    <form>
+    <form action="/albums" method="post">
         <fieldset>
             <legend>Add Album</legend>
             <label>Album Title</label>
@@ -28,15 +28,15 @@
             <label>Artist</label>
             <input type="text" name="artist"/>
             <label>Song Count</label>
-            <input type="number" value="songCount">
+            <input type="text" name="songCount">
             <label>Length(in seconds)</label>
-            <input type="number" value="length">
+            <input type="text" name="length">
             <label>Album Cover</label>
             <input type="url" name="imgUrl" placeholder="image url">
             <input type="submit" value="Add Album">
         </fieldset>
     </form>
-    <form>
+    <form action="/new-song" method="post">
         <fieldset>
             <legend>Add Song</legend>
             <label>Song Title</label>
@@ -44,9 +44,9 @@
             <label>Album</label>
             <input type="text" name="album"/>
             <label>Track Number</label>
-            <input type="number" value="trackNum">
+            <input type="number" name="trackNum">
             <label>Length(in seconds)</label>
-            <input type="number" value="length">
+            <input type="number" name="length">
             <input type="submit" value="Add Song">
         </fieldset>
     </form>
