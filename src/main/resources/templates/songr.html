@@ -36,17 +36,17 @@
             <input type="submit" value="Add Album">
         </fieldset>
     </form>
-    <form action="/new-song" method="post">
+    <form action="/song" th:method="post">
         <fieldset>
             <legend>Add Song</legend>
             <label>Song Title</label>
             <input type="text" name="title"/>
             <label>Album</label>
-            <input type="text" name="album"/>
+            <input type="hidden" name="albumId" th:value="${albums.id}"/>
             <label>Track Number</label>
-            <input type="number" name="trackNum">
+            <input type="text" name="trackNum">
             <label>Length(in seconds)</label>
-            <input type="number" name="length">
+            <input type="text" name="length">
             <input type="submit" value="Add Song">
         </fieldset>
     </form>

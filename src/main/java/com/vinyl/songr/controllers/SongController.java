@@ -20,6 +20,8 @@ public class SongController {
     @Autowired
     AlbumsRepo AlbumsRepo;
 
+    Song tempSong;
+
     @GetMapping("/song")
     public String getSong(Model s){
         List<Song> newSong = SongRepo.findAll();
@@ -28,11 +30,13 @@ public class SongController {
         return "songr";
     }
 
-    @PostMapping("/new-song")
-    public RedirectView addSongToAlbum(String title, Integer length, Integer trackNum, String album){
-        Albums albums = AlbumsRepo.findByTitle(album);
-        Song addNewSongs = new Song(title, length, trackNum, album);
+    @PostMapping("/song")
+    public RedirectView addSongToAlbum(String title, Integer length, Integer trackNum, Long albumId){
+        Albums albums = AlbumsRepo.getReferenceById(albumId);
+        Song addNewSongs = new Song(title, length, trackNum, albumId);
         SongRepo.save(addNewSongs);
-        return new RedirectView("/new-song");
+        addNewSongs.setAlbum(albums);
+        return new RedirectView("/albums");
     }
+
 }
