@@ -1,9 +1,6 @@
 package com.vinyl.songr.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Song {
@@ -15,6 +12,11 @@ public class Song {
     public Integer length;
     public Integer trackNum;
     public String album;
+
+    @ManyToOne
+    Albums albums;
+    protected Song(){
+    }
 
     public Song(String title, Integer length, Integer trackNum, String album) {
         this.title = title;

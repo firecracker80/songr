@@ -2,10 +2,8 @@ package com.vinyl.songr.models;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Albums {
@@ -19,6 +17,10 @@ public class Albums {
     private Integer length;
     private String imgUrl;
 
+    @OneToMany(mappedBy = "albums")
+    List<Song> albumSongs;
+    protected Albums(){
+    }
     public Albums(String title, String artist, Integer songCount, Integer length, String imgUrl) {
         this.title = title;
         this.artist = artist;
